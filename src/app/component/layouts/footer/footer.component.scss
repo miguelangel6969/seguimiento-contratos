@@ -1,0 +1,364 @@
+@charset "UTF-8";
+
+.rowFooter > * {
+ padding-left: 0;
+ margin-left: unset;
+}
+
+p {
+ color: #4b4b4b;
+ line-height: 24px;
+ font-size: 16px;
+}
+
+.rowFooter.col-xs-12.col-lg-7.govco-texto-sedes,
+.rowFooter.col-xs-12.col-lg-7.govco-network {
+ padding-left: 0;
+ width: 100%;
+}
+
+body {
+  font-family: Verdana, Work Sans, sans-serif;
+}
+
+[class^="govco-"]:before,
+[class*=" govco-"]:before {
+ font-style: normal;
+ font-weight: normal;
+ display: inline-block;
+ text-decoration: inherit;
+ width: 1em;
+ margin-right: 0.2em;
+ text-align: center;
+ font-variant: normal;
+ text-transform: none;
+ line-height: 1em;
+ margin-left: 0.2em;
+ -webkit-font-smoothing: antialiased;
+ -moz-osx-font-smoothing: grayscale;
+}
+
+.govco-twitter-square:before {
+ content: "\ee16";
+}
+
+.govco-twitter:before {
+ content: "\ee17";
+}
+
+.govco-instagram-square:before {
+ content: "\ed5b";
+}
+
+.govco-instagram:before {
+ content: "\ed5c";
+}
+
+.govco-facebook-f:before {
+ content: "\ed0e";
+}
+
+.govco-facebook-messenger:before {
+ content: "\ed0f";
+}
+
+.govco-facebook-square:before {
+ content: "\ed10";
+}
+
+.govco-facebook:before {
+ content: "\ed11";
+}
+
+.govco-phone:before {
+ content: "\ea8a";
+}
+
+.govco-phone-alt:before {
+ content: "\ea85";
+}
+
+.govco-logo-entidad {
+ height: 80px;
+ display: inline-block;
+ margin-right: 50px;
+}
+
+.govco-co {
+ height: 48px;
+ margin-top: 24px;
+ display: inline-block;
+ content: url(https://cdn.www.gov.co/v4/assets/images/logo-colombia.svg);
+}
+
+.govco-separator {
+ border-left: 1px solid #e5eefb;
+ opacity: 1px;
+ height: 44px;
+ margin-left: 10px;
+ margin-right: 5px;
+ display: inline-block;
+}
+
+.govco-logo {
+ height: 30px;
+ display: inline-block;
+ content: url(https://cdn.www.gov.co/v4/assets/images/logo.svg);
+ vertical-align: super;
+}
+
+.govco-footer-logo {
+ height: 96px;
+ background-color: #3366cc;
+ width: 100%;
+ margin-top: 20px;
+}
+
+.govco-card {
+ margin-top: 120px;
+ background-color: #962d46;
+}
+
+.govco-text-header-1 {
+ color: #962d46;
+ text-align: left;
+ font-size: 20px;
+ font-weight: 600;
+}
+
+.govco-text-header-2 {
+ color: #962d46;
+ text-align: left;
+ font-size: 16px;
+ font-weight: bold;
+ margin-bottom: 0;
+}
+
+.govco-text-header-3 {
+ color: #962d46;
+ text-align: left;
+ font-weight: bold;
+ margin-bottom: 0;
+}
+
+.govco-logo-container {
+ margin-left: 80px;
+}
+
+.govco-link-modal {
+ color: #3366cc;
+ margin-right: 30px;
+ text-decoration: underline;
+}
+
+.icon::before {
+ transform: scale(1.5, 1.5);
+ margin-right: 10px;
+ margin-left: 5px;
+ vertical-align: text-top;
+ color: #3366cc;
+}
+
+.govco-iconContainer {
+ display: inline-block;
+ width: auto;
+}
+
+.govco-links-container {
+ margin-bottom: 50px;
+ margin-top: 30px;
+}
+
+.govco-footer-text {
+ margin-top: 20px;
+ margin-left: 80px;
+}
+
+.govco-texto-sedes,
+.govco-network {
+ padding: unset;
+}
+
+.govco-network,
+.govco-listado-sedes {
+ margin-top: 30px;
+}
+
+.govco-sedes {
+ margin-top: 20px;
+}
+
+.govco-logo-div-a {
+ text-align: right;
+}
+
+.govco-links-directorio {
+ margin-top: 20px;
+}
+
+.govco-link-container {
+ display: inline-block;
+ width: auto;
+}
+
+.govco-mostrar {
+ display: none;
+}
+
+.govco-nombre-entidad {
+ margin-bottom: 0px;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+}
+
+.govco-data-front {
+ margin-left: 10%;
+ margin-right: 10%;
+ margin-bottom: 20px;
+ -webkit-box-shadow: 0px 5px 10px -5px #e6effd;
+ box-shadow: 0px 5px 10px -5px #e6effd;
+ border: 5px solid #e5eefb;
+ border-radius: 20px;
+ opacity: 1;
+ background-color: #ffffff;
+ border: solid 3px #dce8f8;
+ border-radius: 20px;
+ box-shadow: none;
+ position: relative;
+ top: -3em;
+ padding-top: 20px;
+ padding-right: 30px;
+ padding-bottom: 10px;
+ padding-left: 20px;
+ box-sizing: border-box;
+}
+
+@media (max-width: 991px) {
+ .govco-sedes,
+ .govco-sede-info,
+ .govco-text-header-1,
+ .govco-footer-text,
+ .govco-nombre-entidad,
+ .govco-logo-div-a,
+ .govco-texto-sedes,
+ .govco-links-directorio,
+ .govco-listado-sedes,
+ .govco-links-container,
+ .govco-network,
+ .govco-iconContainer,
+ .govco-text-header-3,
+ .govco-link-container,
+ .govco-mostrar,
+ .govco-logo-container,
+ .govco-texto-sedes {
+   margin-left: 15px;
+ }
+ 
+ .govco-sedes,
+ .govco-texto-sedes,
+ .govco-links-directorio,
+ .govco-listado-sedes,
+ .govco-links-container,
+ .govco-network,
+ .govco-iconContainer,
+ .govco-link-container,
+ .govco-mostrar,
+ .govco-logo-container {
+   width: calc(100% - 15px);
+ }
+
+ .govco-sedes,
+ .govco-network,
+ .govco-link-container,
+ .govco-texto-sedes {
+   margin-top: 20px;
+ }
+
+ .govco-text-header-1,
+ .govco-text-header-3 {
+   margin-top: 20px;
+ }
+
+ .govco-logo-entidad {
+   height: 65px;
+ }
+
+ .govco-texto-sedes {
+   padding-right: 20px;
+ }
+}
+
+.icono-facebook {
+ background-image: url('../../../../assets/icons/icons8-facebook.svg');
+ background-size: cover;
+ width: 24px;
+ height: 24px;
+ display: inline-block;
+ margin-right: 8px;
+}
+
+.icono-instagram {
+ background-image: url('../../../../assets/icons/icons8-instagram.svg');
+ background-size: cover;
+ width: 24px;
+ height: 24px;
+ display: inline-block;
+ margin-right: 8px;
+}
+
+.icono-x {
+ background-image: url('../../../../assets/icons/icons8-x.svg');
+ background-size: cover;
+ width: 24px;
+ height: 24px;
+ display: inline-block;
+ margin-right: 8px;
+}
+
+.icono-youtube {
+ background-image: url('../../../../assets/icons/icons8-youtube.svg');
+ background-size: cover;
+ width: 24px;
+ height: 24px;
+ display: inline-block;
+ margin-right: 12px;
+}
+
+.icono-tiktok {
+ background-image: url('../../../../assets/icons/icons8-tik-tok.svg');
+ background-size: cover;
+ width: 24px;
+ height: 24px;
+ display: inline-block;
+ margin-right: 8px;
+}
+
+.gov-co-redes-sociales {
+ display: flex;
+ flex-wrap: wrap;
+ gap: 20px;
+ align-items: center;
+ margin-top: 10px;
+}
+
+.gov-co-redes-sociales .texto-redes-sociales {
+ font-size: 16px;
+ color: #333;
+ margin-bottom: 0;
+}
+
+.gov-co-redes-sociales a {
+ text-decoration: none;
+ color: #3366cc;
+ display: inline-flex;
+ align-items: center;
+}
+
+.gov-co-redes-sociales a .icono-red-social,
+.gov-co-redes-sociales a .texto-redes-sociales {
+ margin-right: 5px;
+ display: inline-block;
+}
+
+

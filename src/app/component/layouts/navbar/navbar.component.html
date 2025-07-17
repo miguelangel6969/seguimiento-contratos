@@ -1,0 +1,37 @@
+<nav class="navbar-container">
+  <!-- Navegación izquierda -->
+  <ul class="nav-links">
+    <li [class.active]="isActive('/personas')">
+      <a [routerLink]="['/personas']">Consulta de usuarios</a>
+    </li>
+    <li [class.active]="isActive('/sistemas')">
+      <a [routerLink]="['/sistemas']">Administración de sistemas</a>
+    </li>
+    <!-- Puedes agregar más enlaces aquí -->
+  </ul>
+
+  <!-- Usuario -->
+  <div class="user-menu">
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>account_circle</mat-icon>
+        <span>MIGUEL</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>verified_user</mat-icon>
+        <span>MIGUEL</span>
+      </button>
+      <button mat-menu-item [routerLink]="['/manual', 'manual']">
+        <mat-icon>book</mat-icon>
+        <span>Manual de usuario</span>
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>power_settings_new</mat-icon>
+        <span>Cerrar sesión</span>
+      </button>
+    </mat-menu>
+  </div>
+</nav>
