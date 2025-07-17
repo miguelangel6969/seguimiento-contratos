@@ -1,0 +1,19 @@
+<div style="max-width: 100%;">
+
+  @if (rutaActual !== '/login') {
+    <app-header></app-header>
+    <navbar-cmp></navbar-cmp>
+  }
+
+</div>
+<div>
+  <div>
+    <div class="container-fluid">
+      <div class="content-height">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
+<app-loading-screen id="cargador"></app-loading-screen>

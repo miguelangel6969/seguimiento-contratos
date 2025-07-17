@@ -1,0 +1,36 @@
+::ng-deep .custom-table {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+::ng-deep .mat-header-cell {
+  background-color: #962d46;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 16px 12px;
+}
+
+::ng-deep .mat-cell {
+  font-size: 14px;
+  padding: 14px 12px;
+}
+
+::ng-deep .table-row:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+::ng-deep .table-row:hover {
+  background-color: #f3f4f6;
+}
+
+::ng-deep button.mat-stroked-button {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-color: #962d46;
+  color: #962d46;
+}
+
+::ng-deep button.mat-stroked-button:hover {
+  background-color: #f4e1e5;
+}

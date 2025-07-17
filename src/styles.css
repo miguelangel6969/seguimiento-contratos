@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+.tailwind-overlay {
+  @apply text-base text-gray-800;
+}
+
+.tailwind-overlay .mat-dialog-container {
+  @apply bg-white rounded-xl p-6;
+}
+
+.tailwind-overlay h2 {
+  @apply text-2xl font-bold text-[#962d46] mb-4 text-center;
+}
+
+.tailwind-overlay mat-form-field {
+  @apply w-full;
+}
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
