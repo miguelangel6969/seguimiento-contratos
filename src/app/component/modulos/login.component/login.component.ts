@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
+import {AuthService} from '../../../core/service/auth.service';
 
 @Component({
   selector: 'app-login.component',
@@ -11,16 +12,25 @@ import {Router} from '@angular/router';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  usuario: string = '';
+  clave: string = '';
 
-  constructor(private router: Router) {}
-
-  email: string = '';
-  password: string = '';
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   onSubmit() {
-    console.log('Login:', this.email, this.password);
-    if (this.email && this.password) {
-      this.router.navigate(['/personas']);
+    if (this.usuario && this.clave) {
+      this.authService.login(this.usuario, this.clave).subscribe({
+        next: (resp) => {
+          this.authService.guardarToken(resp.token);
+          this.router.navigate(['/personas']);
+        },
+        error: () => {
+          alert('Correo o contraseña inválidos');
+        }
+      });
     } else {
       alert('Por favor ingresa tu email y contraseña');
     }

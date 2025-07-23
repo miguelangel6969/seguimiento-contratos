@@ -1,11 +1,19 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
 import { App } from './app/app';
-import {OverlayContainer} from '@angular/cdk/overlay';
+import { appConfig } from './app/app.config';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import {authInterceptor} from './app/core/Interceptor/interceptor';
 
-bootstrapApplication(App, appConfig)
-  .then(appRef => {
-    const overlay = appRef.injector.get(OverlayContainer);
-    overlay.getContainerElement().classList.add('tailwind-overlay');
-  })
-  .catch(err => console.error(err));
+bootstrapApplication(App, {
+  ...appConfig,
+  providers: [
+    ...(appConfig.providers || []),
+    provideHttpClient(
+      withInterceptors([
+        authInterceptor
+      ])
+    )
+  ]
+}).catch((err) => console.error(err));
+
+

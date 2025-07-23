@@ -1,9 +1,10 @@
 export interface Persona {
   id_persona: number;
   nombre: string;
+  telefono: string;
   correo: string;
   direccion: string;
-  telefono: string;
-  fecha_creacion: Date;
+  numero_documento: string | null;
+  fechaCreacion: Date;
   id_tipo_documento: number;
 }

@@ -23,7 +23,7 @@ export class PersonasDetalleComponent implements OnInit {
       correo: [this.persona.correo, [Validators.required, Validators.email]],
       telefono: [this.persona.telefono],
       direccion: [this.persona.direccion],
-      fecha_creacion: [this.persona.fecha_creacion],
+      fecha_creacion: [this.persona.fechaCreacion],
       id_tipo_documento: [this.persona.id_tipo_documento],
     });
   }

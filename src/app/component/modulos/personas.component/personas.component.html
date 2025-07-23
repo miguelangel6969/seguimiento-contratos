@@ -1,76 +1,92 @@
 <div class="p-6">
-  <h2 class="text-2xl font-bold text-[#962d46] mb-6 border-b pb-2">📋 Listado de Personas</h2>
+  <div class="flex items-center justify-between mb-6 border-b pb-2">
+    <h2 class="text-2xl font-bold text-[#962d46]">
+      📋 Listado de Personas
+    </h2>
 
-  <!-- 🔍 Filtro de búsqueda -->
-  <div class="mb-6">
-    <label for="search" class="block text-sm font-semibold text-gray-700 mb-2">
-      Buscar persona
-    </label>
-    <div class="relative">
-      <input
-        id="search"
-        type="text"
-        (input)="applyFilter($event)"
-        placeholder="Nombre, correo, teléfono..."
-        class="w-auto px-4 py-2 pr-10 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#962d46] focus:border-[#962d46] placeholder:text-sm"
-      />
-    </div>
+    <button (click)="crearPersona()" mat-raised-button style="background-color: #962d46; color: white;" class="ml-2">
+      <mat-icon class="mr-1">person_pin</mat-icon> Crear Persona
+    </button>
   </div>
 
-  <!-- 📄 Tabla -->
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-full custom-table">
 
-    <!-- Nombre -->
-    <ng-container matColumnDef="nombre">
-      <th mat-header-cell *matHeaderCellDef>👤 Nombre</th>
-      <td mat-cell *matCellDef="let persona">{{ persona.nombre }}</td>
-    </ng-container>
+  <!-- 🔄 Cargando -->
+  @if (cargando()) {
+    <div class="flex items-center justify-center h-40 text-[#962d46] text-lg font-semibold">
+      Cargando personas...
+    </div>
+  } @else {
 
-    <!-- Correo -->
-    <ng-container matColumnDef="correo">
-      <th mat-header-cell *matHeaderCellDef>📧 Correo</th>
-      <td mat-cell *matCellDef="let persona">{{ persona.correo }}</td>
-    </ng-container>
+    <!-- 🔍 Filtro de búsqueda -->
+    <div class="mb-6">
+      <label for="search" class="block text-sm font-semibold text-gray-700 mb-2">
+        Buscar persona
+      </label>
+      <div class="relative">
+        <input
+          id="search"
+          type="text"
+          (input)="applyFilter($event)"
+          placeholder="Nombre, correo, teléfono..."
+          class="w-auto px-4 py-2 pr-10 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#962d46] focus:border-[#962d46] placeholder:text-sm"
+        />
+      </div>
+    </div>
 
-    <!-- Teléfono -->
-    <ng-container matColumnDef="telefono">
-      <th mat-header-cell *matHeaderCellDef>📱 Teléfono</th>
-      <td mat-cell *matCellDef="let persona">{{ persona.telefono }}</td>
-    </ng-container>
+    <!-- 📄 Tabla -->
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-full custom-table">
 
-    <!-- Dirección -->
-    <ng-container matColumnDef="direccion">
-      <th mat-header-cell *matHeaderCellDef>📍 Dirección</th>
-      <td mat-cell *matCellDef="let persona">{{ persona.direccion }}</td>
-    </ng-container>
+      <!-- Nombre -->
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef>👤 Nombre</th>
+        <td mat-cell *matCellDef="let persona">{{ persona.nombre }}</td>
+      </ng-container>
 
-    <!-- Acciones -->
-    <ng-container matColumnDef="acciones">
-      <th mat-header-cell *matHeaderCellDef>⚙️ Acciones</th>
-      <td mat-cell *matCellDef="let persona">
-        <button mat-stroked-button color="primary" (click)="verDetalle(persona)">
-          Ver detalle
-        </button>
-      </td>
-    </ng-container>
+      <!-- Correo -->
+      <ng-container matColumnDef="correo">
+        <th mat-header-cell *matHeaderCellDef>📧 Correo</th>
+        <td mat-cell *matCellDef="let persona">{{ persona.correo }}</td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row"></tr>
-  </table>
+      <!-- Teléfono -->
+      <ng-container matColumnDef="telefono">
+        <th mat-header-cell *matHeaderCellDef>📱 Teléfono</th>
+        <td mat-cell *matCellDef="let persona">{{ persona.telefono }}</td>
+      </ng-container>
 
+      <!-- Dirección -->
+      <ng-container matColumnDef="direccion">
+        <th mat-header-cell *matHeaderCellDef>📍 Dirección</th>
+        <td mat-cell *matCellDef="let persona">{{ persona.direccion }}</td>
+      </ng-container>
+
+      <!-- Acciones -->
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef>⚙️ Acciones</th>
+        <td mat-cell *matCellDef="let persona">
+          <button mat-stroked-button color="primary" (click)="verDetalle(persona)">
+            Ver detalle
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row"></tr>
+
+    </table>
+
+  }
   <mat-paginator
     [pageSizeOptions]="[5, 10, 20]"
     showFirstLastButtons
     class="mt-4 rounded-lg border border-gray-200 shadow-sm"
   ></mat-paginator>
+
+  <!-- 🧾 Modal detalle -->
+  @if (modalPersona) {
+    <app-personas-detalle
+      [persona]="modalPersona"
+      (cerrar)="cerrarModal()"
+    ></app-personas-detalle>
+  }
 </div>
-
-@if (modalPersona){
-  <app-personas-detalle
-    [persona]="modalPersona"
-    (cerrar)="cerrarModal()"
-  ></app-personas-detalle>
-}
-
-
-
