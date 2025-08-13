@@ -8,50 +8,107 @@
 
     <!-- Título -->
     <h2 class="text-2xl font-bold text-center text-[#962d46] mb-6">
-      ✏️ Editar Persona
+      {{ !esCreacion ? '✏️ Editar Persona' : '➕ Crear Persona' }}
     </h2>
 
     <!-- Formulario en grid -->
     <form [formGroup]="personaForm" class="grid grid-cols-6 gap-6">
-
-      <div class="col-span-2">
+      <!-- Nombre -->
+      <div class="col-span-3">
         <label class="block text-sm text-gray-700 mb-1">Nombre</label>
         <input class="w-full border rounded px-3 py-2" formControlName="nombre" />
       </div>
 
-      <div class="col-span-2">
-        <label class="block text-sm text-gray-700 mb-1">Correo</label>
-        <input type="email" class="w-full border rounded px-3 py-2" formControlName="correo" />
-      </div>
-
-      <div class="col-span-2">
-        <label class="block text-sm text-gray-700 mb-1">Teléfono</label>
-        <input class="w-full border rounded px-3 py-2" formControlName="telefono" />
-      </div>
-
+      <!-- Número de documento -->
       <div class="col-span-3">
-        <label class="block text-sm text-gray-700 mb-1">Dirección</label>
-        <input class="w-full border rounded px-3 py-2" formControlName="direccion" />
+        <label class="block text-sm text-gray-700 mb-1">Número de documento</label>
+        <input class="w-full border rounded px-3 py-2" formControlName="numero_documento" />
       </div>
 
+      <!-- Tipo de documento -->
       <div class="col-span-2">
-        <label class="block text-sm text-gray-700 mb-1">Fecha creación</label>
-        <input type="date" class="w-full border rounded px-3 py-2" formControlName="fecha_creacion" />
-      </div>
-
-      <div class="col-span-1">
         <label class="block text-sm text-gray-700 mb-1">Tipo Doc</label>
-        <select class="w-full border rounded px-3 py-2" formControlName="id_tipo_documento">
+        <select class="w-full border rounded px-3 py-2" formControlName="idTipoDocumento">
           <option [value]="1">Cédula</option>
           <option [value]="2">Pasaporte</option>
           <option [value]="3">NIT</option>
         </select>
       </div>
+
+      <!-- Correo -->
+      <div class="col-span-2">
+        <label class="block text-sm text-gray-700 mb-1">Correo</label>
+        <input type="email" class="w-full border rounded px-3 py-2" formControlName="correo" />
+      </div>
+
+      <!-- Teléfono -->
+      <div class="col-span-2">
+        <label class="block text-sm text-gray-700 mb-1">Teléfono</label>
+        <input class="w-full border rounded px-3 py-2" formControlName="telefono" />
+      </div>
+
+      <!-- Dirección -->
+      <div class="col-span-3">
+        <label class="block text-sm text-gray-700 mb-1">Dirección</label>
+        <input class="w-full border rounded px-3 py-2" formControlName="direccion" />
+      </div>
+
+      <!-- Fecha de nacimiento -->
+      <div class="col-span-3">
+        <label class="block text-sm text-gray-700 mb-1">Fecha de nacimiento</label>
+        <input type="date" class="w-full border rounded px-3 py-2" formControlName="fecha_nacimiento" />
+      </div>
+
+      <!-- Responsable de IVA -->
+      <div class="col-span-1">
+        <label class="block text-sm text-gray-700 mb-1">Responsable IVA</label>
+        <select class="w-full border rounded px-3 py-2" formControlName="responsable_iva">
+          <option [value]="true">Sí</option>
+          <option [value]="false">No</option>
+        </select>
+      </div>
+
+      <!-- Genera factura -->
+      <div class="col-span-1">
+        <label class="block text-sm text-gray-700 mb-1">¿Genera factura?</label>
+        <select class="w-full border rounded px-3 py-2" formControlName="genera_factura">
+          <option [value]="true">Sí</option>
+          <option [value]="false">No</option>
+        </select>
+      </div>
+
+      @if (!esCreacion) {
+        <!-- Solo visible en edición -->
+        <div class="col-span-3">
+          <label class="block text-sm text-gray-700 mb-1">Fecha de creación</label>
+          <input type="date" class="w-full border rounded px-3 py-2" formControlName="fechaCreacion" readonly />
+        </div>
+      } @else {
+        <!-- Solo visible en creación -->
+        <div class="col-span-3">
+          <label class="block text-sm text-gray-700 mb-1">Usuario</label>
+          <input
+            class="w-full border rounded px-3 py-2 bg-gray-100"
+            formControlName="usuario"
+            readonly
+          />
+        </div>
+
+        <div class="col-span-3">
+          <label class="block text-sm text-gray-700 mb-1">Rol</label>
+          <select class="w-full border rounded px-3 py-2" formControlName="idRoles">
+            @for (rol of roles; track rol.idRol) {
+              <option [value]="rol.idRol">{{ rol.nombreRol }}</option>
+            }
+          </select>
+        </div>
+      }
+
     </form>
 
     <!-- Botones -->
     <div class="mt-6 text-right">
-      <button (click)="cerrar.emit()" class="px-5 py-2 border rounded-lg mr-2 hover:bg-gray-100">
+      <button (click)="cerrarYLimpiar()" class="px-5 py-2 border rounded-lg mr-2 hover:bg-gray-100">
         Cancelar
       </button>
       <button

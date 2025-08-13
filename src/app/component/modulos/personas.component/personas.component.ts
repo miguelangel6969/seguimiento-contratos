@@ -46,8 +46,11 @@ import {PersonaService} from '../../../core/service/persona.service';
 })
 export class PersonasComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   modalPersona: Persona | null = null;
   displayedColumns: string[] = ['nombre', 'correo', 'telefono', 'direccion', 'acciones'];
+  isCreate: boolean = false;
+
   cargando = signal(true);
   personas = signal<Persona[]>([]);
   dataSource = new MatTableDataSource<Persona>();
@@ -82,13 +85,28 @@ export class PersonasComponent implements AfterViewInit {
 
   verDetalle(persona: Persona) {
     this.modalPersona = persona;
+    this.isCreate = false
   }
 
   cerrarModal() {
     this.modalPersona = null;
   }
 
-  crearPersona(){
 
+  crearPersona() {
+    this.isCreate = true
+    this.modalPersona = {
+      id_persona: 0, // puedes dejarlo en 0 o null, el backend lo ignora al crear
+      nombre: '',
+      telefono: '',
+      correo: '',
+      direccion: '',
+      numero_documento: '',
+      fechaCreacion: new Date(),
+      idTipoDocumento: 1,
+      fecha_nacimiento: null,
+      responsable_iva: null,
+      genera_factura: null,
+    };
   }
 }
