@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, signal, ViewChild} from '@angular/core';
 import {
   MatCell, MatCellDef,
   MatColumnDef,
@@ -9,9 +9,14 @@ import {
   MatTableDataSource
 } from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
-import {Sistema} from '../../../core/models/Sistemas.model';
+import {Ambiente, Sistema} from '../../../core/models/Sistemas.model';
 import {MatButton} from '@angular/material/button';
 import {SistemasDetalleComponent} from './sistemas-detalle.component/sistemas-detalle.component';
+import {Persona} from '../../../core/models/Persona.model';
+import {SistemasService} from '../../../core/service/sistema.service';
+import {MatDialog} from '@angular/material/dialog';
+import {PersonaService} from '../../../core/service/persona.service';
+import {PersonasDetalleComponent} from '../personas.component/personas-detalle.component/personas-detalle.component';
 
 @Component({
   selector: 'app-sistemas.component',
@@ -24,32 +29,43 @@ import {SistemasDetalleComponent} from './sistemas-detalle.component/sistemas-de
     MatCell,
     MatColumnDef,
     MatTable,
-    SistemasDetalleComponent,
     MatCellDef,
     MatRowDef,
     MatHeaderRowDef,
-    MatHeaderCellDef
+    MatHeaderCellDef,
+    SistemasDetalleComponent
   ],
   templateUrl: './sistemas.component.html',
   styleUrl: './sistemas.component.css',
   standalone: true
 })
-export class SistemasComponent implements AfterViewInit {
-  displayedColumns: string[] = ['nombre', 'version', 'responsable', 'estado', 'acciones'];
-  dataSource = new MatTableDataSource<Sistema>([
-    { nombre: 'CoreBanking', version: '3.2.1', responsable: 'Ana Pérez', estado: 'Activo' },
-    { nombre: 'CRM Suite', version: '2.0.5', responsable: 'Carlos López', estado: 'Inactivo' },
-    { nombre: 'ERP Nexus', version: '5.1.0', responsable: 'Laura Gómez', estado: 'Mantenimiento' },
-    { nombre: 'Inventario Pro', version: '1.8.3', responsable: 'David Ruiz', estado: 'Activo' },
-    { nombre: 'Gestión RH', version: '4.0.0', responsable: 'Marta Torres', estado: 'Activo' },
-  ]);
 
+export class SistemasComponent implements AfterViewInit {
+  displayedColumns: string[] = ['nombre', 'Desarrollo', 'Pruebas', 'Produccion', 'acciones'];
   modalSistema: Sistema | null = null;
+  dataSource = new MatTableDataSource<Sistema>();
+  sistemas = signal<Sistema[]>([]);
+  cargando = signal(true);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+  constructor(
+    private sistemasService: SistemasService
+  ) {}
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.cargar();
+  }
+
+  cargar() {
+    this.sistemasService.getSistemas().subscribe({
+      next: (resp) => {
+        this.sistemas.set(resp); // Guardamos en el signal
+        this.dataSource.data = resp; // Alimentamos la tabla
+      },
+      complete: () => this.cargando.set(false),
+    });
   }
 
   applyFilter(event: Event) {
@@ -57,11 +73,25 @@ export class SistemasComponent implements AfterViewInit {
     this.dataSource.filter = filterValue;
   }
 
-  verDetalle(sistema: Sistema) {
-    this.modalSistema = sistema;
+  tieneAmbiente(sistema: Sistema, tipo: string): boolean {
+    return sistema.ambientes?.some(
+      amb => amb.tipo_ambiente.nombre.toUpperCase() === tipo
+    ) ?? false;
+  }
+
+  modalAmbiente: Ambiente | null = null;
+
+  verDetalleAmbiente(sistema: Sistema, tipo: string) {
+    const ambiente = sistema.ambientes.find(
+      amb => amb.tipo_ambiente.nombre.toUpperCase() === tipo
+    );
+    if (ambiente) {
+      this.modalAmbiente = ambiente;
+    }
   }
 
   cerrarModal() {
-    this.modalSistema = null;
+    this.modalAmbiente = null;
   }
+
 }

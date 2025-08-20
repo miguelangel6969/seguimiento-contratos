@@ -1,12 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-
-interface Sistema {
-  nombre: string;
-  version: string;
-  responsable: string;
-  estado: string;
-}
+import {Ambiente} from '../../../../core/models/Sistemas.model';
 
 @Component({
   selector: 'app-sistemas-detalle',
@@ -15,27 +9,13 @@ interface Sistema {
   templateUrl: './sistemas-detalle.component.html',
 })
 export class SistemasDetalleComponent implements OnInit {
-  @Input() sistema!: Sistema;
+  @Input() ambiente!: Ambiente;
   @Output() cerrar = new EventEmitter<void>();
 
-  sistemaForm!: FormGroup;
-
-  constructor(private fb: FormBuilder) {}
+  constructor() {}
 
   ngOnInit(): void {
-    this.sistemaForm = this.fb.group({
-      nombre: [this.sistema.nombre, Validators.required],
-      version: [this.sistema.version, Validators.required],
-      responsable: [this.sistema.responsable, Validators.required],
-      estado: [this.sistema.estado, Validators.required],
-    });
   }
 
-  guardar() {
-    if (this.sistemaForm.valid) {
-      console.log('Sistema actualizado:', this.sistemaForm.value);
-      this.cerrar.emit();
-    }
-  }
 }
 

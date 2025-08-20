@@ -4,7 +4,7 @@ export interface Persona {
   telefono: string;
   correo: string;
   direccion: string;
-  numeroDocumento: string; // Unificado en camelCase
+  numero_documento: string; // Unificado en camelCase
   fechaCreacion: Date;    // opcional al crear
   fecha_nacimiento: Date | null;
   idTipoDocumento: number;

@@ -102,7 +102,7 @@ export class PersonasComponent implements AfterViewInit {
       telefono: '',
       correo: '',
       direccion: '',
-      numeroDocumento: '',
+      numero_documento: '',
       fechaCreacion: new Date(),
       idTipoDocumento: 1,
       fecha_nacimiento: null,

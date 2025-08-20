@@ -38,7 +38,7 @@ export class PersonasDetalleComponent implements OnInit {
 
     this.personaForm = this.fb.group({
       nombre: [this.persona?.nombre ?? '', Validators.required],
-      numeroDocumento: [this.persona?.numeroDocumento ?? '', Validators.required],
+      numero_documento: [this.persona?.numero_documento ?? '', Validators.required],
       idTipoDocumento: [this.persona?.idTipoDocumento ?? null, Validators.required],
       correo: [
         this.persona?.correo ?? '',
@@ -77,7 +77,7 @@ export class PersonasDetalleComponent implements OnInit {
     if (this.esCreacion) {
       const payload = {
         nombre: form.nombre,
-        numeroDocumento: form.numeroDocumento,
+        numero_documento: form.numero_documento,
         telefono: form.telefono,
         correo: form.correo,
         direccion: form.direccion,
@@ -86,7 +86,7 @@ export class PersonasDetalleComponent implements OnInit {
         genera_factura: form.genera_factura ? '1' : '0',
         fecha_nacimiento: form.fecha_nacimiento,
         usuario: form.usuario,
-        clave: form.numeroDocumento,
+        clave: form.numero_documento,
         fechaCreacion: new Date(),
         idRoles: [form.idRoles],
       };
