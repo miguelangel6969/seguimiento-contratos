@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { Persona } from '../../../../core/models/Persona.model';
 import {PersonaService} from '../../../../core/service/persona.service';
 import {Rol} from '../../../../core/models/Rol.model';
+import {UsuarioService} from '../../../../core/service/usuario.service';
 
 @Component({
   selector: 'app-personas-detalle',
@@ -22,7 +23,8 @@ export class PersonasDetalleComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private personaService: PersonaService
+    private personaService: PersonaService,
+    private usuarioService: UsuarioService
   ) {}
 
   ngOnInit(): void {
@@ -36,7 +38,7 @@ export class PersonasDetalleComponent implements OnInit {
 
     this.personaForm = this.fb.group({
       nombre: [this.persona?.nombre ?? '', Validators.required],
-      numero_documento: [this.persona?.numero_documento ?? '', Validators.required],
+      numeroDocumento: [this.persona?.numeroDocumento ?? '', Validators.required],
       idTipoDocumento: [this.persona?.idTipoDocumento ?? null, Validators.required],
       correo: [
         this.persona?.correo ?? '',
@@ -63,7 +65,7 @@ export class PersonasDetalleComponent implements OnInit {
   }
 
   guardar(): void {
-    if (this.personaForm.invalid) return;
+    //if (this.personaForm.invalid) return;
 
     const form = this.personaForm.value;
     this.esCreacion = this.crear;
@@ -75,21 +77,21 @@ export class PersonasDetalleComponent implements OnInit {
     if (this.esCreacion) {
       const payload = {
         nombre: form.nombre,
-        numero_documento: form.numero_documento,
+        numeroDocumento: form.numeroDocumento,
         telefono: form.telefono,
         correo: form.correo,
         direccion: form.direccion,
-        idTipoDocumento: form.idTipoDocumento,
-        responsable_iva: form.responsable_iva ?? '0',
-        genera_factura: form.genera_factura ?? '0',
+        idTipoDocumento: Number(form.idTipoDocumento),
+        responsable_iva: form.responsable_iva ? '1' : '0',
+        genera_factura: form.genera_factura ? '1' : '0',
         fecha_nacimiento: form.fecha_nacimiento,
         usuario: form.usuario,
-        clave: form.numero_documento,
+        clave: form.numeroDocumento,
         fechaCreacion: new Date(),
-        idRoles: [form.idRoles]
+        idRoles: [form.idRoles],
       };
 
-      this.personaService.crearPersona(payload).subscribe({
+      this.usuarioService.crearPersona(payload).subscribe({
         next: () => this.cerrar.emit()
       });
     } else {

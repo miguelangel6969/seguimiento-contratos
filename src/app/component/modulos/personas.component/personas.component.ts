@@ -90,6 +90,7 @@ export class PersonasComponent implements AfterViewInit {
 
   cerrarModal() {
     this.modalPersona = null;
+    this.ngAfterViewInit();
   }
 
 
@@ -101,7 +102,7 @@ export class PersonasComponent implements AfterViewInit {
       telefono: '',
       correo: '',
       direccion: '',
-      numero_documento: '',
+      numeroDocumento: '',
       fechaCreacion: new Date(),
       idTipoDocumento: 1,
       fecha_nacimiento: null,
